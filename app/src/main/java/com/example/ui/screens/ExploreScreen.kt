@@ -31,8 +31,11 @@ import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.example.data.*
 import com.example.ui.components.*
@@ -92,13 +95,21 @@ fun ExploreScreen(
                     verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     Text(
-                        text = "Good evening, Aarav",
+                        text = buildAnnotatedString {
+                            withStyle(SpanStyle(fontWeight = FontWeight.Normal)) {
+                                append("Good evening, ")
+                            }
+                            withStyle(SpanStyle(fontWeight = FontWeight.ExtraBold)) {
+                                append("Vihaan")
+                            }
+                        },
                         style = MaterialTheme.typography.headlineLarge,
                         color = TruTextPrimary
                     )
                     Text(
                         text = "Verified live drops across India · Zero scalper markups",
                         style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
                         color = TruTextMuted
                     )
                 }
@@ -117,6 +128,7 @@ fun ExploreScreen(
                             selected = active,
                             onClick = { onSelectCity(city) },
                             leadingIcon = Icons.Filled.LocationOn,
+                            fontWeight = FontWeight.Bold,
                             modifier = Modifier.testTag("city_${city.name}")
                         )
                     }
@@ -130,6 +142,7 @@ fun ExploreScreen(
                     onValueChange = onSearchChange,
                     placeholder = "Search concerts, cricket, comedy, venues…",
                     testTag = "explore_search_input",
+                    boldText = true,
                     modifier = Modifier.padding(horizontal = 16.dp)
                 )
             }
@@ -146,6 +159,7 @@ fun ExploreScreen(
                             label = cat.label,
                             selected = active,
                             onClick = { onSelectCategory(cat) },
+                            fontWeight = FontWeight.Bold,
                             modifier = Modifier.testTag("cat_${cat.name}")
                         )
                     }
@@ -173,10 +187,16 @@ fun ExploreScreen(
                             verticalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
                             Icon(Icons.Filled.SearchOff, contentDescription = null, tint = TruTextMuted, modifier = Modifier.size(40.dp))
-                            Text("No matching events", style = MaterialTheme.typography.titleLarge, color = TruTextPrimary)
+                            Text(
+                                text = "No matching events",
+                                style = MaterialTheme.typography.titleLarge,
+                                fontWeight = FontWeight.Bold,
+                                color = TruTextPrimary
+                            )
                             Text(
                                 "Try switching city to All cities or clearing your search filter.",
                                 style = MaterialTheme.typography.bodyMedium,
+                                fontWeight = FontWeight.Bold,
                                 color = TruTextMuted
                             )
                             TextButton(onClick = {
@@ -184,7 +204,7 @@ fun ExploreScreen(
                                 onSelectCategory(EventCategory.ALL)
                                 onSearchChange("")
                             }) {
-                                Text("Reset filters", color = TruLime)
+                                Text("Reset filters", fontWeight = FontWeight.Bold, color = TruLime)
                             }
                         }
                     }
@@ -205,6 +225,7 @@ fun ExploreScreen(
                         Text(
                             text = "Trending drops",
                             style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
                             color = TruTextPrimary,
                             modifier = Modifier.padding(horizontal = 16.dp)
                         )
@@ -226,6 +247,7 @@ fun ExploreScreen(
                     Text(
                         text = "Near you",
                         style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
                         color = TruTextPrimary,
                         modifier = Modifier.padding(horizontal = 16.dp)
                     )
@@ -334,16 +356,19 @@ private fun FeaturedPosterCard(event: TruEvent, onClick: () -> Unit) {
                 Text(
                     text = "${event.city.label.uppercase()} · ${event.dateLabel.uppercase()}",
                     style = MonoSmallStyle,
+                    fontWeight = FontWeight.Bold,
                     color = TruLime
                 )
                 Text(
                     text = event.title,
                     style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
                     color = TruTextPrimary
                 )
                 Text(
                     text = event.venue,
                     style = MaterialTheme.typography.bodySmall,
+                    fontWeight = FontWeight.Bold,
                     color = TruTextMuted,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -357,10 +382,11 @@ private fun FeaturedPosterCard(event: TruEvent, onClick: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column {
-                Text("STARTS AT", style = MonoSmallStyle, color = TruTextMuted)
+                Text("STARTS AT", style = MonoSmallStyle, fontWeight = FontWeight.Bold, color = TruTextMuted)
                 Text(
                     text = TruTicketFormatters.formatInr(event.tiers.minOf { it.priceInr }),
                     style = MonoLargeStyle,
+                    fontWeight = FontWeight.Bold,
                     color = TruLime
                 )
             }
@@ -368,6 +394,7 @@ private fun FeaturedPosterCard(event: TruEvent, onClick: () -> Unit) {
                 Text(
                     text = "View passes",
                     style = MaterialTheme.typography.labelLarge,
+                    fontWeight = FontWeight.Bold,
                     color = TruBg,
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp)
                 )
@@ -401,7 +428,7 @@ private fun TrendingDropCard(event: TruEvent, onClick: () -> Unit) {
                         .background(TruBg.copy(alpha = 0.85f))
                         .padding(horizontal = 8.dp, vertical = 4.dp)
                 ) {
-                    Text(event.city.label, style = MonoSmallStyle, color = TruLime)
+                    Text(event.city.label, style = MonoSmallStyle, fontWeight = FontWeight.Bold, color = TruLime)
                 }
             }
             Column(
@@ -411,6 +438,7 @@ private fun TrendingDropCard(event: TruEvent, onClick: () -> Unit) {
                 Text(
                     text = event.title,
                     style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
                     color = TruTextPrimary,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -418,6 +446,7 @@ private fun TrendingDropCard(event: TruEvent, onClick: () -> Unit) {
                 Text(
                     text = "${event.dateLabel} · ${event.timeLabel}",
                     style = MaterialTheme.typography.bodySmall,
+                    fontWeight = FontWeight.Bold,
                     color = TruTextMuted
                 )
                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -425,10 +454,16 @@ private fun TrendingDropCard(event: TruEvent, onClick: () -> Unit) {
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text("${event.soldPercent}% sold", style = MonoSmallStyle, color = TruWarningAmber)
+                        Text(
+                            "${event.soldPercent}% sold",
+                            style = MonoSmallStyle,
+                            fontWeight = FontWeight.Bold,
+                            color = TruWarningAmber
+                        )
                         Text(
                             TruTicketFormatters.formatInr(event.tiers.first().priceInr),
                             style = MonoSmallStyle,
+                            fontWeight = FontWeight.Bold,
                             color = TruTextPrimary
                         )
                     }
@@ -465,10 +500,16 @@ private fun NearYouEventRow(event: TruEvent, onClick: () -> Unit) {
                 modifier = Modifier.size(72.dp).clip(RoundedCornerShape(12.dp))
             )
             Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(event.category.label.uppercase(), style = MonoSmallStyle, color = TruViolet)
+                Text(
+                    event.category.label.uppercase(),
+                    style = MonoSmallStyle,
+                    fontWeight = FontWeight.Bold,
+                    color = TruViolet
+                )
                 Text(
                     text = event.title,
                     style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
                     color = TruTextPrimary,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -476,6 +517,7 @@ private fun NearYouEventRow(event: TruEvent, onClick: () -> Unit) {
                 Text(
                     text = "${event.city.label} · ${event.dateLabel}",
                     style = MaterialTheme.typography.bodySmall,
+                    fontWeight = FontWeight.Bold,
                     color = TruTextMuted
                 )
             }
@@ -483,9 +525,10 @@ private fun NearYouEventRow(event: TruEvent, onClick: () -> Unit) {
                 Text(
                     text = TruTicketFormatters.formatInr(event.tiers.minOf { it.priceInr }),
                     style = MonoMediumStyle,
+                    fontWeight = FontWeight.Bold,
                     color = TruLime
                 )
-                Text("onwards", style = MaterialTheme.typography.bodySmall, color = TruTextMuted)
+                Text("onwards", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold, color = TruTextMuted)
             }
         }
     }

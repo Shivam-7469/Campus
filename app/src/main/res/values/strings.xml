@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">TruTicket</string>
+    <string name="welcome_domain_tag">truticket.in</string>
+    <string name="welcome_eyebrow">FAIR ACCESS · ZERO SCALPING</string>
+    <string name="welcome_headline_prefix">Why choose</string>
+    <string name="welcome_headline_brand">TruTicket</string>
+    <string name="welcome_pill_fairqueue">FairQueue</string>
+    <string name="welcome_pill_ticket_dna">Ticket DNA</string>
+    <string name="welcome_pill_live">Live</string>
+    <string name="welcome_pill_resale_cap">110% Cap</string>
+    <string name="welcome_pill_verified">Verified</string>
+    <string name="welcome_summary_default">Bot-proof lotteries, 10s rotating passes, and resale capped at 110%.</string>
+    <string name="welcome_detail_fairqueue">FairQueue: Cryptographic drop lotteries keep bots out of line.</string>
+    <string name="welcome_detail_ticket_dna">Ticket DNA: Rotating 10-second QR nonces block screenshot fakes.</string>
+    <string name="welcome_detail_resale_cap">110% Cap: Escrow resale limits markups so real fans afford entry.</string>
+    <string name="welcome_detail_verified">Verified: Every organizer, transfer, and gate scan stays authentic.</string>
+    <string name="welcome_cta_get_started">Get started</string>
+    <string name="welcome_mascot_description">TruTicket lime mascot illustration</string>
+    <string name="welcome_logo_description">TruTicket emblem, long press for role switcher</string>
 </resources>

@@ -106,6 +106,7 @@ dependencies {
   // implementation(libs.androidx.room.ktx)
   // implementation(libs.androidx.room.runtime)
   implementation(libs.coil.compose)
+  implementation(libs.lottie.compose)
   implementation("com.google.zxing:core:3.5.3")
   // implementation(libs.converter.moshi)
   // implementation(libs.firebase.ai)

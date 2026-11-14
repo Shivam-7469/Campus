@@ -140,6 +140,7 @@ fun TruTopBar(
                             Text(
                                 text = "TruTicket",
                                 style = MaterialTheme.typography.titleLarge,
+                                fontWeight = FontWeight.Bold,
                                 color = TruTextPrimary,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
@@ -148,6 +149,7 @@ fun TruTopBar(
                                 Text(
                                     text = role.label.uppercase(),
                                     style = MaterialTheme.typography.labelSmall,
+                                    fontWeight = FontWeight.Bold,
                                     color = TruLime,
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis
@@ -159,6 +161,7 @@ fun TruTopBar(
                     Text(
                         text = title,
                         style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
                         color = TruTextPrimary,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
@@ -263,7 +266,7 @@ fun TruBottomBar(
                         Text(
                             text = tab.label,
                             style = MaterialTheme.typography.labelMedium,
-                            fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
+                            fontWeight = FontWeight.Bold,
                             color = contentColor,
                             maxLines = 1,
                             softWrap = false,

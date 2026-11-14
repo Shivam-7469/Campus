@@ -77,7 +77,7 @@ fun ProfileScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Column(modifier = Modifier.weight(1f)) {
-                                Text("Aarav Sharma", style = MaterialTheme.typography.titleLarge, color = TruTextPrimary)
+                                Text("Vihaan Sharma", style = MaterialTheme.typography.titleLarge, color = TruTextPrimary)
                                 Text("+91 98450 21834 · Bengaluru", style = MaterialTheme.typography.bodySmall, color = TruTextMuted)
                             }
                             Spacer(Modifier.width(8.dp))

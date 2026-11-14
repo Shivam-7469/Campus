@@ -53,16 +53,17 @@ fun OrderConfirmationScreen(
         label = "confirm_scale"
     )
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Transparent)
-            .systemBarsPadding()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 20.dp, vertical = 24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(20.dp)
-    ) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Transparent)
+                .systemBarsPadding()
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 20.dp, vertical = 24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(20.dp)
+        ) {
         Spacer(Modifier.height(12.dp))
         Box(
             modifier = Modifier
@@ -112,6 +113,11 @@ fun OrderConfirmationScreen(
                 )
             }
         }
+        }
+
+        CelebratoryConfettiOverlay(
+            triggerKey = state.lastOrderRef
+        )
     }
 }
 

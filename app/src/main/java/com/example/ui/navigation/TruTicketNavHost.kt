@@ -237,7 +237,8 @@ fun TruTicketApp(
                             viewModel.showMessage("Verification link copied for $ref")
                             navController.navigate("${TruRoutes.VERIFIER}?ref=$ref")
                         },
-                        onLogoLongPress = { viewModel.toggleRoleSwitcherSheet(true) }
+                        onLogoLongPress = { viewModel.toggleRoleSwitcherSheet(true) },
+                        onConsumeCelebration = viewModel::consumeTicketCelebration
                     )
                 }
 

@@ -57,11 +57,21 @@ fun TicketDnaScreen(
     onForceRotateQr: () -> Unit,
     onListForResale: () -> Unit,
     onShareVerifier: (String) -> Unit,
-    onLogoLongPress: () -> Unit
+    onLogoLongPress: () -> Unit,
+    onConsumeCelebration: () -> Unit = {}
 ) {
     val clipboard = LocalClipboardManager.current
     val context = LocalContext.current
     var showPayload by remember { mutableStateOf(false) }
+    var showClaimConfetti by remember(ticket.ticketRef) {
+        mutableStateOf(state.pendingTicketCelebration)
+    }
+    LaunchedEffect(state.pendingTicketCelebration) {
+        if (state.pendingTicketCelebration) {
+            showClaimConfetti = true
+            onConsumeCelebration()
+        }
+    }
     val qrPayload = """{"ticket_ref":"${ticket.ticketRef}","expires_at":${state.qrExpiresAtEpoch},"nonce":"${state.qrNonce}"}"""
     val ringProgress by animateFloatAsState(
         targetValue = state.qrSecondsLeft / 10f,
@@ -118,12 +128,13 @@ fun TicketDnaScreen(
         TicketStatus.PAST, TicketStatus.REVOKED, TicketStatus.EXPIRED -> TruStatusTone.DANGER
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Transparent)
-            .navigationBarsPadding()
-    ) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Transparent)
+                .navigationBarsPadding()
+        ) {
         TruTopBar(
             title = "Ticket DNA",
             canNavigateBack = true,
@@ -424,6 +435,13 @@ fun TicketDnaScreen(
                 }
             }
         }
+        }
+
+        CelebratoryConfettiOverlay(
+            triggerKey = ticket.ticketRef,
+            enabled = showClaimConfetti,
+            onFinished = { showClaimConfetti = false }
+        )
     }
 }
 

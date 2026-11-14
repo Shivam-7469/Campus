@@ -81,6 +81,7 @@ data class TruTicketUiState(
     val gateScanLogs: List<GateScanRecord> = emptyList(),
     val lastGateResult: GateScanRecord? = null,
     val redeemedScanTimes: Map<String, String> = mapOf("TT-BLR-4998" to "18:02:11"),
+    val pendingTicketCelebration: Boolean = false,
     val snackbarMessage: String? = null
 ) {
     val selectedEvent: TruEvent

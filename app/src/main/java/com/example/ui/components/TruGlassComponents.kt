@@ -191,7 +191,8 @@ fun TruGlassFilterChip(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     leadingIcon: ImageVector? = null,
-    minHeight: Dp = 44.dp
+    minHeight: Dp = 44.dp,
+    fontWeight: FontWeight? = null
 ) {
     val topColor by animateColorAsState(
         targetValue = if (selected) Color(0xD41B2312) else Color(0xB31B1B28),
@@ -257,7 +258,7 @@ fun TruGlassFilterChip(
             Text(
                 text = label,
                 style = MaterialTheme.typography.labelLarge,
-                fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
+                fontWeight = fontWeight ?: if (selected) FontWeight.Bold else FontWeight.Medium,
                 color = labelColor,
                 maxLines = 1,
                 softWrap = false,
@@ -275,6 +276,7 @@ fun TruGlassSearchBar(
     modifier: Modifier = Modifier,
     testTag: String = "glass_search_input",
     leadingContentDescription: String = "Search",
+    boldText: Boolean = false,
     onSearchAction: (() -> Unit)? = null
 ) {
     var isFocused by remember { mutableStateOf(false) }
@@ -332,6 +334,7 @@ fun TruGlassSearchBar(
                     Text(
                         text = placeholder,
                         style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = if (boldText) FontWeight.Bold else FontWeight.Normal,
                         color = TruTextMuted,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
@@ -341,7 +344,10 @@ fun TruGlassSearchBar(
                     value = value,
                     onValueChange = onValueChange,
                     singleLine = true,
-                    textStyle = MaterialTheme.typography.bodyLarge.copy(color = TruTextPrimary),
+                    textStyle = MaterialTheme.typography.bodyLarge.copy(
+                        color = TruTextPrimary,
+                        fontWeight = if (boldText) FontWeight.Bold else FontWeight.Normal
+                    ),
                     cursorBrush = SolidColor(TruLime),
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                     keyboardActions = KeyboardActions(

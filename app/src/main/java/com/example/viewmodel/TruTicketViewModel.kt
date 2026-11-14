@@ -321,9 +321,14 @@ class TruTicketViewModel : ViewModel() {
                 resaleListings = state.resaleListings.filterNot { it.id == listingId },
                 tickets = listOf(newTicket) + state.tickets.filterNot { it.ticketRef == listing.ticketRef },
                 activeTicketRef = newTicket.ticketRef,
+                pendingTicketCelebration = true,
                 snackbarMessage = "Purchased ${listing.ticketRef} safely within price cap"
             )
         }
+    }
+
+    fun consumeTicketCelebration() {
+        _uiState.update { it.copy(pendingTicketCelebration = false) }
     }
 
     fun listTicketForResale(ticketRef: String, askPriceInr: Int) {
